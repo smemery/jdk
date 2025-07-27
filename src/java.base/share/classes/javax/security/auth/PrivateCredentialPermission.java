@@ -298,6 +298,11 @@ public final class PrivateCredentialPermission extends Permission {
             // get the Principal Name
             principalName = tokenizer.nextToken();
 
+            if (principalName.equals("\"")) {
+                throw new IllegalArgumentException(ResourcesMgr.getString
+                        ("PrivateCredentialPermission.Principal.Name.invalid"));
+            }
+
             if (!principalName.startsWith("\"")) {
                 MessageFormat form = new MessageFormat(ResourcesMgr.getString
                         ("permission.name.name.syntax.invalid."));
@@ -328,11 +333,6 @@ public final class PrivateCredentialPermission extends Permission {
                         (form.format(source) + ResourcesMgr.getString
                                 ("Principal.Name.missing.end.quote"));
                 }
-            }
-
-            if (principalName.equals("\"")) {
-                throw new IllegalArgumentException(ResourcesMgr.getString
-                        ("PrivateCredentialPermission.Principal.Name.invalid"));
             }
 
             principalName = principalName.substring
