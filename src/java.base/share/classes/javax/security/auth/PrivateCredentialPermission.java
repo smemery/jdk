@@ -330,6 +330,11 @@ public final class PrivateCredentialPermission extends Permission {
                 }
             }
 
+            if (principalName.equals("\"")) {
+                throw new IllegalArgumentException(ResourcesMgr.getString
+                        ("PrivateCredentialPermission.Principal.Name.invalid"));
+            }
+
             principalName = principalName.substring
                                         (1, principalName.length() - 1);
 
